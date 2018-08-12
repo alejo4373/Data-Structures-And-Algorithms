@@ -1,0 +1,14 @@
+{
+  "name": "arrays-strings",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dynamicArray.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  }
+}
