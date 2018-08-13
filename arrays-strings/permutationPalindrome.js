@@ -9,7 +9,6 @@ const permutationPalindrome = (str) => {
       charCount[crrChar] = charCount[crrChar] + 1 || 1
     }
   }
-  console.log(charCount);
   //Verify that all characters have an even count or
   //that only one character is unique
   // ---OR----
@@ -28,8 +27,4 @@ const permutationPalindrome = (str) => {
  return uniqueOddChar < 2 
 }
 
-console.log(permutationPalindrome('abxba'))
-console.log(permutationPalindrome('axbba'))
-console.log(permutationPalindrome('abeaba'))
-console.log(permutationPalindrome('ab    ba'))
-console.log(permutationPalindrome('Tact Coa'))
+module.exports = permutationPalindrome;
