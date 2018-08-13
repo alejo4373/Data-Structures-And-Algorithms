@@ -4,7 +4,7 @@
   "description": "",
   "main": "dynamicArray.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC",
