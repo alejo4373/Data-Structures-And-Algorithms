@@ -4,41 +4,47 @@ exports.__esModule = true;
  * Creates a node that will hold a linked list in itself
  * @class
  */
-var Node = /** @class */ (function () {
-    function Node(data) {
+var LinkedListNode = /** @class */ (function () {
+    function LinkedListNode(data) {
         this.next = null;
         this.data = data;
     }
-    Node.prototype.appendToEnd = function (data) {
-        var endNode = new Node(data);
+    LinkedListNode.prototype.appendToEnd = function (data) {
+        var endNode = new LinkedListNode(data);
         var node = this;
         while (node.next !== null) {
             node = node.next;
         }
         node.next = endNode;
     };
-    Node.prototype.appendAtGivenIndex = function (index, data) {
+    /**
+     * appends at a given "index" and returns the new linked list
+     * does not modify the original
+     * @param index number
+     * @param data any
+     */
+    //This is giving me problems I should have a LinkedList class wrapping the Node
+    //because what if you want to update index 0 which will be this (the head)
+    LinkedListNode.prototype.appendAtGivenIndex = function (index, data) {
         var crrIndex = 0; // kind of indexing linked list like arrays
-        var newNode = new Node(data);
+        var newNode = new LinkedListNode(data);
         var node = this;
         if (index !== 0) {
-            while (node.next !== null && crrIndex !== index) {
+            while (node.next !== null && crrIndex !== index - 1) {
                 node = node.next;
                 crrIndex += 1;
             }
-            console.log('this is crrNode', node);
-            console.log('this is newNode', newNode);
+            console.log('crrNode', node);
             newNode.next = node.next;
             node.next = newNode;
         }
         else {
-            console.log('else');
             newNode.next = this;
             node = newNode;
         }
         return node;
     };
-    Node.prototype.printDummyHumanReadable = function () {
+    LinkedListNode.prototype.printDummyHumanReadable = function () {
         var node = this;
         var result = node.data + '->';
         while (node.next !== null) {
@@ -47,18 +53,22 @@ var Node = /** @class */ (function () {
         }
         return result + null;
     };
-    return Node;
+    LinkedListNode.prototype.atIndex = function (index) {
+        var node = this;
+        var i = 0;
+        while (i < index) {
+            node = node.next;
+            i += 1;
+        }
+        return node.data;
+    };
+    return LinkedListNode;
 }());
-exports["default"] = Node;
-//Initialize linked list
-var myLinkedList = new Node(0);
-//Fill in linked list with nums 1 to 10
-// for(let i = 1; i < 11; i++) {
-//   myLinkedList.appendToEnd(i);
-// }
-//add node at index 5
+exports.LinkedListNode = LinkedListNode;
+var myLinkedList = new LinkedListNode(0);
+for (var i = 1; i < 11; i++) {
+    myLinkedList.appendToEnd(i);
+}
+var newLL = myLinkedList.appendAtGivenIndex(5, 100);
 console.log(myLinkedList.printDummyHumanReadable());
-var headChanged = myLinkedList.appendAtGivenIndex(0, 100); //=> 0-> 100->1->2->3->4->5->6->7->8->9->10-> 
-// myLinkedList.appendAtGivenIndex(100, 100);//=> 0->1->2->3->4->5->6->7->8->9->10->100-> why does this work?
-console.log(headChanged.printDummyHumanReadable());
-console.log(myLinkedList.printDummyHumanReadable());
+console.log(newLL.printDummyHumanReadable());
