@@ -1,5 +1,5 @@
 /**
- * Creates a node that will hold a linked list in itself
+ * Creates a node that will hold data and a reference to next
  * @class 
  */
 export class LinkedListNode {
@@ -9,45 +9,72 @@ export class LinkedListNode {
   constructor(data: any) {
     this.data = data;
   }
+}
 
-  appendToEnd(data: any): void {
-    let endNode: LinkedListNode = new LinkedListNode(data);
-    let node: LinkedListNode = this;
-    while (node.next !== null) {
-      node = node.next;
-    }
-    node.next = endNode
+/**
+ * Creates a LinkedList that will hold references to the head and tail nodes
+ * @class 
+ */
+export class LinkedList {
+  head: LinkedListNode = null;
+  tail: LinkedListNode = null;
+
+  constructor(data: any) {
+    this.head = new LinkedListNode(data);
+    this.tail = this.head
   }
 
-  /**
-   * appends at a given "index" and returns the new linked list
-   * does not modify the original
-   * @param index number
-   * @param data any
-   */
-  //This is giving me problems I should have a LinkedList class wrapping the Node
-  //because what if you want to update index 0 which will be this (the head)
-  appendAtGivenIndex(index: number, data: any): LinkedListNode {
+  appendFirst(data: any): void {
+    let newHead: LinkedListNode = new LinkedListNode(data);
+    newHead.next = this.head;
+    this.head = newHead;
+  }
+
+  appendToEnd(data: any): void {
+    let newNode : LinkedListNode = new LinkedListNode(data);
+    this.tail.next = newNode;
+    this.tail = newNode
+  }
+
+  appendAtIndex(index: number, data: any): void {
     let crrIndex: number = 0; // kind of indexing linked list like arrays
     let newNode: LinkedListNode = new LinkedListNode(data);
-    let node: LinkedListNode = this;
+    let node: LinkedListNode = this.head;
     if (index !== 0) {
       while (node.next !== null && crrIndex !== index - 1) {
         node = node.next;
         crrIndex += 1;
       }
-      console.log('crrNode', node)
-      newNode.next = node.next;
-      node.next = newNode;
+        newNode.next = node.next;
+        node.next = newNode;
+      //Check if were at the tail to update this.tail
+      if(newNode.next === null) { 
+        this.tail = newNode
+      }
     } else {
-      newNode.next = this;
-      node = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
     }
-    return node;
   }
 
-  printDummyHumanReadable(): string {
-    let node: LinkedListNode = this;
+  /**
+   * Finds node that satisfies the callback test 
+   * @param callback function to execute on each node, taking the current node as argument
+   * @returns {LinkedListNode} that satisfies the provided testing function. Otherwise undefined
+   */
+  find(callback: Function): LinkedListNode {
+    let crrNode: LinkedListNode = this.head
+    while(crrNode.next !== null) {
+      if(callback(crrNode)) {
+        return crrNode;
+      }
+      crrNode = crrNode.next;
+    }
+    return undefined;
+  }
+
+  printHumanReadable(): string {
+    let node: LinkedListNode = this.head;
     let result: string = node.data + '->'
     while (node.next !== null) {
       result += node.next.data + '->';
@@ -57,7 +84,7 @@ export class LinkedListNode {
   }
 
   atIndex(index: number): any {
-    let node: LinkedListNode = this;
+    let node: LinkedListNode = this.head;
     let i: number = 0;
     while (i < index) {
       node = node.next;
@@ -66,11 +93,3 @@ export class LinkedListNode {
     return node.data
   }
 }
-
-let myLinkedList = new LinkedListNode(0);
-for (let i = 1; i < 11; i++) {
-  myLinkedList.appendToEnd(i);
-}
-let newLL = myLinkedList.appendAtGivenIndex(5, 100);
-console.log(myLinkedList.printDummyHumanReadable());
-console.log(newLL.printDummyHumanReadable());
