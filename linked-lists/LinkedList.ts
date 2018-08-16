@@ -20,6 +20,9 @@ export class LinkedList {
   head: LinkedListNode = null;
   tail: LinkedListNode = null;
 
+  // TODO: remove constructor and allow the creation of an empty linked list
+  // will need to edit append methods to check if the insertion is the first one
+  // in order to set the tail
   constructor(data: any) {
     this.head = new LinkedListNode(data);
     this.tail = this.head
@@ -60,6 +63,13 @@ export class LinkedList {
 
   removeFirst(): LinkedListNode {
     let oldHead: LinkedListNode = this.head
+    // Only in case we are removing the last/only node left in the list
+    // set head to null
+    if(oldHead.next === null) {
+      this.head = null;
+      this.tail = null;
+      return oldHead
+    }
     let newHead: LinkedListNode = oldHead.next;
     oldHead.next = null // Should it 'truly' remove by removing its reference to the rest of the link?
     this.head = newHead;
@@ -93,13 +103,16 @@ export class LinkedList {
   }
 
   printHumanReadable(): string {
-    let node: LinkedListNode = this.head;
-    let result: string = node.data + '->'
-    while (node.next !== null) {
-      result += node.next.data + '->';
-      node = node.next;
+    if(this.head !== null) {
+      let node: LinkedListNode = this.head;
+      let result: string = node.data + '->'
+      while (node.next !== null) {
+        result += node.next.data + '->';
+        node = node.next;
+      }
+      return result + null
     }
-    return result + null
+    throw new Error('Error empty list. Nothing to print')
   }
 
   atIndex(index: number): any {
