@@ -13,6 +13,7 @@ export class LinkedListNode {
 
 /**
  * Creates a LinkedList that will hold references to the head and tail nodes
+ * which allows to have constant time insertion in both ends of the list
  * @class 
  */
 export class LinkedList {
@@ -57,6 +58,24 @@ export class LinkedList {
     }
   }
 
+  removeFirst(): LinkedListNode {
+    let oldHead: LinkedListNode = this.head
+    let newHead: LinkedListNode = oldHead.next;
+    oldHead.next = null // Should it 'truly' remove by removing its reference to the rest of the link?
+    this.head = newHead;
+    return oldHead;
+  }
+
+  removeLast(): LinkedListNode {
+    let node: LinkedListNode = this.head;
+    let oldTail: LinkedListNode = this.tail;
+    while(node.next.next !== null) {
+      node = node.next;
+    }
+    node.next = null;
+    this.tail = node;
+    return oldTail;
+  } 
   /**
    * Finds node that satisfies the callback test 
    * @param callback function to execute on each node, taking the current node as argument
