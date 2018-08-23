@@ -30,16 +30,18 @@ export class BinaryTreeNode {
   }
 
   //Depth Fist traversal inOrder, preOrder and postOrder
-  traverseInOrder(): void {
+  traverseInOrder(): Array<any> {
+    let traverse: Array<any> = [];
     if (this.left) {
-      this.left.traverseInOrder();
+      traverse = traverse.concat(this.left.traverseInOrder());
     }
 
-    console.log(this.val);
+    traverse.push(this.val);
 
     if (this.right) {
-      this.right.traverseInOrder();
+      traverse = traverse.concat(this.right.traverseInOrder());
     }
+    return traverse;
   }
 
   traverseInPreOrder(): void {
