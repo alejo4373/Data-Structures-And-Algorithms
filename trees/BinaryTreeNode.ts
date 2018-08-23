@@ -5,6 +5,7 @@ export class BinaryTreeNode {
   val: number | string;
   left: BinaryTreeNode = null
   right: BinaryTreeNode = null
+  parent: BinaryTreeNode = null
 
   constructor(val: number | string) {
     this.val = val;
@@ -135,12 +136,14 @@ a.right = g;
 
 b.left = c;
 b.right = f;
+b.parent = a;
 
 c.left = d;
 c.right = e;
 
 g.left = h;
 g.right = k;
+g.parent = a;
 
 h.left = i;
 h.right = j;

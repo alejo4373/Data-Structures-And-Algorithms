@@ -1,4 +1,4 @@
-import { BinaryTreeNode } from './TreeNode'
+import { BinaryTreeNode } from './BinaryTreeNode'
 import { Stack } from '../stacks/Stack';
 
 // https://en.wikipedia.org/wiki/Depth-first_search
