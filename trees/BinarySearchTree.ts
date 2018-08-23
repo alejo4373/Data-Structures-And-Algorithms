@@ -33,7 +33,7 @@ g.right = k;
 h.left = i;
 h.right = j;
 
-const binarySearch = (root: BinaryTreeNode, target: number | string): BinaryTreeNode => {
+export const binarySearch = (root: BinaryTreeNode, target: number | string): BinaryTreeNode => {
   if (root.val === target) {
     return root;
   }
@@ -49,7 +49,7 @@ const binarySearch = (root: BinaryTreeNode, target: number | string): BinaryTree
   }
 }
 
-const binarySearchIteratively = (root: BinaryTreeNode, target: number | string): BinaryTreeNode => {
+export const binarySearchIteratively = (root: BinaryTreeNode, target: number | string): BinaryTreeNode => {
   let stack: Stack = new Stack();
   stack.push(root)
   while (!stack.isEmpty()) {
