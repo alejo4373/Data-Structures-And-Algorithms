@@ -59,7 +59,28 @@ const bfs = (root: GraphNode): void => {
   }
 }
 
-dfs(myGraph.nodes[0]);
-console.log('=====')
-myGraph.nodes.forEach(n => n.visited = false);
-bfs(myGraph.nodes[0]);
+const availablePathBetweenNodes = (graph: Graph, start: GraphNode, end: GraphNode): boolean => {
+  if (start === end) return true;
+  start.visited = true;
+  let queue = new Queue(start);
+  while (!queue.isEmpty()) {
+    let node = queue.peek().data;
+    for (let i = 0; i < node.adjacentNodes.length; i++) {
+      let n = node.adjacentNodes[i]
+      if (n === end) return true;
+      if (!n.visited) {
+        n.visited = true;
+        queue.enqueue(n);
+      }
+    }
+    queue.dequeue();
+  }
+  return false;
+}
+
+// dfs(myGraph.nodes[0]);
+// console.log('=====')
+// myGraph.nodes.forEach(n => n.visited = false);
+// bfs(myGraph.nodes[0]);
+// console.log(availablePathBetweenNodes(myGraph, node0, node3))
+console.log(availablePathBetweenNodes(myGraph, node3, node0))
