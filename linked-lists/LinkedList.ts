@@ -1,13 +1,13 @@
 /**
- * Creates a node that will hold data and a reference to next
+ * Creates a node that will hold payload and a reference to next
  * @class 
  */
 export class LinkedListNode {
   next: LinkedListNode = null;
-  data: any;
+  payload: any;
 
-  constructor(data: any) {
-    this.data = data;
+  constructor(payload: any) {
+    this.payload = payload;
   }
 }
 
@@ -23,26 +23,26 @@ export class LinkedList {
   // TODO: remove constructor and allow the creation of an empty linked list
   // will need to edit append methods to check if the insertion is the first one
   // in order to set the tail
-  constructor(data: any) {
-    this.head = new LinkedListNode(data);
+  constructor(payload: any) {
+    this.head = new LinkedListNode(payload);
     this.tail = this.head
   }
 
-  appendFirst(data: any): void {
-    let newHead: LinkedListNode = new LinkedListNode(data);
+  appendFirst(payload: any): void {
+    let newHead: LinkedListNode = new LinkedListNode(payload);
     newHead.next = this.head;
     this.head = newHead;
   }
 
-  appendToEnd(data: any): void {
-    let newNode : LinkedListNode = new LinkedListNode(data);
+  appendToEnd(payload: any): void {
+    let newNode : LinkedListNode = new LinkedListNode(payload);
     this.tail.next = newNode;
     this.tail = newNode
   }
 
-  appendAtIndex(index: number, data: any): void {
+  appendAtIndex(index: number, payload: any): void {
     let crrIndex: number = 0; // kind of indexing linked list like arrays
-    let newNode: LinkedListNode = new LinkedListNode(data);
+    let newNode: LinkedListNode = new LinkedListNode(payload);
     let node: LinkedListNode = this.head;
     if (index !== 0) {
       while (node.next !== null && crrIndex !== index - 1) {
@@ -73,7 +73,7 @@ export class LinkedList {
     let newHead: LinkedListNode = oldHead.next;
     oldHead.next = null // Should it 'truly' remove by removing its reference to the rest of the link?
     this.head = newHead;
-    return oldHead;
+    return oldHead.payload;
   }
 
   removeLast(): LinkedListNode {
@@ -84,7 +84,7 @@ export class LinkedList {
     }
     node.next = null;
     this.tail = node;
-    return oldTail;
+    return oldTail.payload;
   } 
   /**
    * Finds node that satisfies the callback test 
@@ -95,7 +95,7 @@ export class LinkedList {
     let crrNode: LinkedListNode = this.head
     while(crrNode.next !== null) {
       if(callback(crrNode)) {
-        return crrNode;
+        return crrNode.payload;
       }
       crrNode = crrNode.next;
     }
@@ -105,9 +105,9 @@ export class LinkedList {
   printHumanReadable(): string {
     if(this.head !== null) {
       let node: LinkedListNode = this.head;
-      let result: string = node.data + '->'
+      let result: string = node.payload + '->'
       while (node.next !== null) {
-        result += node.next.data + '->';
+        result += node.next.payload + '->';
         node = node.next;
       }
       return result + null
@@ -122,6 +122,6 @@ export class LinkedList {
       node = node.next;
       i += 1;
     }
-    return node.data
+    return node.payload
   }
 }

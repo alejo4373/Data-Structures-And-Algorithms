@@ -31,26 +31,25 @@ test('Creates a new LinkedList and adds number 100 at "index" 5', () => {
 
 test('Trying to add number 100 at an out of bounds "index" 20 results adding at the end(tail)', () => {
   testLinkedList.appendAtIndex(20, 100);
-  expect(testLinkedList.tail.data).toBe(100);
+  expect(testLinkedList.tail.payload).toBe(100);
 });
 
-test('.find() node with data 5 in the linked list and nonexistent node ', () => {
-  let node = testLinkedList.find((n) => n.data === 5);
-  let nonexistentNode = testLinkedList.find((n) => n.data === 500);
-  expect(node.data).toBe(5);
+test('.find() node with payload 5 in the linked list and nonexistent node ', () => {
+  let node = testLinkedList.find((n) => n.payload === 5);
+  let nonexistentNode = testLinkedList.find((n) => n.payload === 500);
+  expect(node).toBe(5);
   expect(nonexistentNode).toBeUndefined();
 });
 
 test('Remove first element(head)', () => {
   let removedNode = testLinkedList.removeFirst();
-  expect(removedNode.data).toBe(0); 
-  expect(removedNode.next).toBeNull(); // Should it 'truly' remove by removing its reference to the rest of the link list?
+  expect(removedNode).toBe(0); 
   expect(testLinkedList.printHumanReadable()).toBe('1->2->3->4->5->6->7->8->9->10->null');
 });
 
 test('Remove last element and reassign tail', () => {
   let removedNode = testLinkedList.removeLast();
-  expect(removedNode.data).toBe(10);
+  expect(removedNode).toBe(10);
   expect(testLinkedList.printHumanReadable()).toBe('0->1->2->3->4->5->6->7->8->9->null');
 });
 

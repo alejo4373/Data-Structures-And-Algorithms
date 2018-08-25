@@ -4,14 +4,14 @@
  */
 export class LinkedListAndNode {
   next: LinkedListAndNode = null;
-  data: any;
+  payload: any;
 
-  constructor(data: any) {
-    this.data = data;
+  constructor(payload: any) {
+    this.payload = payload;
   }
 
-  appendToEnd(data: any): void {
-    let endNode: LinkedListAndNode = new LinkedListAndNode(data);
+  appendToEnd(payload: any): void {
+    let endNode: LinkedListAndNode = new LinkedListAndNode(payload);
     let node: LinkedListAndNode = this;
     while (node.next !== null) {
       node = node.next;
@@ -20,9 +20,9 @@ export class LinkedListAndNode {
   }
 
   //Returns a new copy of the linked list, modifies the original only if the index is not 0
-  appendAtIndex(index: number, data: any): LinkedListAndNode {
+  appendAtIndex(index: number, payload: any): LinkedListAndNode {
     let crrIndex: number = 0; // kind of indexing linked list like arrays
-    let newNode: LinkedListAndNode = new LinkedListAndNode(data);
+    let newNode: LinkedListAndNode = new LinkedListAndNode(payload);
     let node: LinkedListAndNode = this;
     if (index !== 0) {
       while (node.next !== null && crrIndex !== index - 1) {
@@ -45,9 +45,9 @@ export class LinkedListAndNode {
 
   printDummyHumanReadable(): string {
     let node: LinkedListAndNode = this;
-    let result: string = node.data + '->'
+    let result: string = node.payload + '->'
     while (node.next !== null) {
-      result += node.next.data + '->';
+      result += node.next.payload + '->';
       node = node.next;
     }
     return result + null
@@ -60,7 +60,7 @@ export class LinkedListAndNode {
       node = node.next;
       i += 1;
     }
-    return node.data
+    return node.payload
   }
 }
 
