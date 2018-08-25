@@ -6,8 +6,8 @@ import { LinkedList } from '../linked-lists/LinkedList';
 export class Queue {
   queue: LinkedList;
 
-  constructor(item) {
-    this.queue = new LinkedList(item);
+  constructor() {
+    this.queue = new LinkedList();
   }
 
   enqueue(item: any): void {
