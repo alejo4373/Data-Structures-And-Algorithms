@@ -19,7 +19,7 @@ export class Queue {
   }
 
   peek(): any {
-    return this.queue.head
+    return this.queue.head.payload
   }
   
   isEmpty(): boolean {

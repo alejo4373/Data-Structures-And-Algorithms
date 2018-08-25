@@ -68,7 +68,7 @@ export class LinkedList {
     if(oldHead.next === null) {
       this.head = null;
       this.tail = null;
-      return oldHead
+      return oldHead.payload
     }
     let newHead: LinkedListNode = oldHead.next;
     oldHead.next = null // Should it 'truly' remove by removing its reference to the rest of the link?
@@ -79,6 +79,12 @@ export class LinkedList {
   removeLast(): LinkedListNode {
     let node: LinkedListNode = this.head;
     let oldTail: LinkedListNode = this.tail;
+    // Removing last node when there is only one
+    if(node.next === null) {
+      this.tail = null;
+      this.head = null;
+      return node;
+    }
     while(node.next.next !== null) {
       node = node.next;
     }

@@ -11,7 +11,7 @@ describe('Queue data structure', () => {
 
   it('10 elements were enqueued ', () => {
     expect(testQueue.printHumanReadable()).toBe('<=0,1,2,3,4,5,6,7,8,9,10<=');
-    expect(testQueue.peek().data).toBe(0);
+    expect(testQueue.peek()).toBe(0);
   })
 
   it('Dequeues 5 elements', () => {
@@ -19,7 +19,7 @@ describe('Queue data structure', () => {
     for(let i = 1; i < 6; i++) {
       lastDequeued = testQueue.dequeue()
     }
-    expect(lastDequeued.data).toBe(4);
+    expect(lastDequeued).toBe(4);
     expect(testQueue.printHumanReadable()).toBe('<=5,6,7,8,9,10<=');
   })
 

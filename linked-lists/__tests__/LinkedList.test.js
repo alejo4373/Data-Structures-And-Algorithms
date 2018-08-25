@@ -50,12 +50,21 @@ test('Remove first element(head)', () => {
 test('Remove last element and reassign tail', () => {
   let removedNode = testLinkedList.removeLast();
   expect(removedNode).toBe(10);
+  expect(testLinkedList.tail.payload).toBe(9);
   expect(testLinkedList.printHumanReadable()).toBe('0->1->2->3->4->5->6->7->8->9->null');
 });
 
 test('Empty list removing first element)', () => {
   while(testLinkedList.head !== null) {
     testLinkedList.removeFirst();
+  }
+  expect(testLinkedList.head).toBeNull();
+  expect(() => testLinkedList.printHumanReadable()).toThrowError('Error empty list. Nothing to print');
+});
+
+test('Empty list removing last element)', () => {
+  while(testLinkedList.head !== null) {
+    testLinkedList.removeLast();
   }
   expect(testLinkedList.head).toBeNull();
   expect(() => testLinkedList.printHumanReadable()).toThrowError('Error empty list. Nothing to print');
