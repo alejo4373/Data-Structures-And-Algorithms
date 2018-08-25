@@ -2,7 +2,7 @@ let { LinkedList } = require('../LinkedList');
 let testLinkedList;
 
 const fillLinkedList = () => {
-  testLinkedList = new LinkedList(0);
+  testLinkedList = new LinkedList();
   for (let i = 1; i < 11; i++) {
     testLinkedList.appendToEnd(i);
   }
@@ -13,7 +13,7 @@ beforeEach(() => {
 })
 
 test('10 elements were added appending to the end', () => {
-  expect(testLinkedList.printHumanReadable()).toBe('0->1->2->3->4->5->6->7->8->9->10->null')
+  expect(testLinkedList.printHumanReadable()).toBe('1->2->3->4->5->6->7->8->9->10->null')
 });
 
 test('10 elements were appended first', () => {
@@ -21,7 +21,7 @@ test('10 elements were appended first', () => {
   for (let i = 1; i < 11; i++) {
     testLinkedList.appendFirst(i);
   }
-  expect(testLinkedList.printHumanReadable()).toBe('10->9->8->7->6->5->4->3->2->1->0->null')
+  expect(testLinkedList.printHumanReadable()).toBe('10->9->8->7->6->5->4->3->2->1->null')
 });
 
 test('Creates a new LinkedList and adds number 100 at "index" 5', () => {
@@ -43,15 +43,15 @@ test('.find() node with payload 5 in the linked list and nonexistent node ', () 
 
 test('Remove first element(head)', () => {
   let removedNode = testLinkedList.removeFirst();
-  expect(removedNode).toBe(0); 
-  expect(testLinkedList.printHumanReadable()).toBe('1->2->3->4->5->6->7->8->9->10->null');
+  expect(removedNode).toBe(1); 
+  expect(testLinkedList.printHumanReadable()).toBe('2->3->4->5->6->7->8->9->10->null');
 });
 
 test('Remove last element and reassign tail', () => {
   let removedNode = testLinkedList.removeLast();
   expect(removedNode).toBe(10);
   expect(testLinkedList.tail.payload).toBe(9);
-  expect(testLinkedList.printHumanReadable()).toBe('0->1->2->3->4->5->6->7->8->9->null');
+  expect(testLinkedList.printHumanReadable()).toBe('1->2->3->4->5->6->7->8->9->null');
 });
 
 test('Empty list removing first element)', () => {

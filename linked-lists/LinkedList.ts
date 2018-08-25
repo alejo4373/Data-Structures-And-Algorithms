@@ -20,24 +20,26 @@ export class LinkedList {
   head: LinkedListNode = null;
   tail: LinkedListNode = null;
 
-  // TODO: remove constructor and allow the creation of an empty linked list
-  // will need to edit append methods to check if the insertion is the first one
-  // in order to set the tail
-  constructor(payload: any) {
-    this.head = new LinkedListNode(payload);
-    this.tail = this.head
-  }
-
   appendFirst(payload: any): void {
     let newHead: LinkedListNode = new LinkedListNode(payload);
     newHead.next = this.head;
+    //If the LL is empty set tail as well
+    if(this.head === null) {
+      this.tail = newHead;
+    }
     this.head = newHead;
   }
 
   appendToEnd(payload: any): void {
     let newNode : LinkedListNode = new LinkedListNode(payload);
-    this.tail.next = newNode;
-    this.tail = newNode
+    //If the LL is empty set head and tail
+    if(this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode
+    }
   }
 
   appendAtIndex(index: number, payload: any): void {
