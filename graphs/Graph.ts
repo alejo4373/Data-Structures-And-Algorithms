@@ -14,10 +14,10 @@ export class Graph {
 }
 
 export class GraphNode {
-  value: string | number;
+  value: number;
   adjacentNodes: Array<GraphNode> = [];
   visited: boolean = false;
-  constructor(value: string | number, adjacentNodes: Array<GraphNode> = []) {
+  constructor(value: number, adjacentNodes: Array<GraphNode> = []) {
     this.value = value;
     this.adjacentNodes = adjacentNodes;
   }
@@ -39,24 +39,27 @@ export const buildSampleGraph = (): Graph => {
   return new Graph(nodes);
 }
 
-const dfs = (root: GraphNode): void => {
+export const dfs = (root: GraphNode): Array<any> => {
+  let traverse: Array<number> = [];
   if (root === null) return null;
-  console.log(root.value);
   root.visited = true;
+  traverse = traverse.concat(root.value)
   root.adjacentNodes.forEach((n) => {
     if (!n.visited) {
-      dfs(n)
+      traverse = traverse.concat(dfs(n))
     }
   })
+  return traverse;
 }
 
-const bfs = (root: GraphNode): void => {
+export const bfs = (root: GraphNode): Array<number> => {
   let queue = new Queue();
+  let traverse: Array<number> = [];
   root.visited = true;
   queue.enqueue(root)
   while (!queue.isEmpty()) {
     let node = queue.dequeue();
-    console.log(node.value);
+    traverse.push(node.value);
     node.adjacentNodes.forEach((n) => {
       if (!n.visited) {
         n.visited = true;
@@ -64,6 +67,7 @@ const bfs = (root: GraphNode): void => {
       }
     });
   }
+  return traverse;
 }
 
 export const availablePathBetweenNodes = (start: GraphNode, end: GraphNode): boolean => {

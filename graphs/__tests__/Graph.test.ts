@@ -1,4 +1,4 @@
-import { buildSampleGraph, availablePathBetweenNodes } from '../Graph';
+import { buildSampleGraph, availablePathBetweenNodes, dfs, bfs} from '../Graph';
 
 describe('Graph data structure', () => {
   it('Builds a Graph data structure with 6 node', () => {
@@ -20,6 +20,17 @@ describe('Graph data structure', () => {
     expect(availablePathBetweenNodes(node3, node0)).toBe(false);
     myGraph.cleanUp();
     expect(availablePathBetweenNodes(node0, node2)).toBe(true);
-
   });
+
+  it('DFS returns array in DFS order', () => {
+    let myGraph = buildSampleGraph();
+    let rootNode = myGraph.nodes[0];
+    expect(dfs(rootNode)).toEqual([0, 1, 3, 2, 4, 5])
+  })
+
+  it('BFS returns array in BFS order', () => {
+    let myGraph = buildSampleGraph();
+    let rootNode = myGraph.nodes[0];
+    expect(bfs(rootNode)).toEqual([0, 1, 4, 5, 3, 2])
+  })
 })
