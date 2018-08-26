@@ -1,4 +1,10 @@
-import { buildSampleGraph, availablePathBetweenNodes, dfs, bfs} from '../Graph';
+import { buildSampleGraph,
+         buildSampleNonConnectedGraph,
+         availablePathBetweenNodes,
+         dfs,
+         bfs, 
+         graphDfs,
+         graphBfs } from '../Graph';
 
 describe('Graph data structure', () => {
   it('Builds a Graph data structure with 6 node', () => {
@@ -33,4 +39,15 @@ describe('Graph data structure', () => {
     let rootNode = myGraph.nodes[0];
     expect(bfs(rootNode)).toEqual([0, 1, 4, 5, 3, 2])
   })
+
+  it('DFS on a graph without root nodes returns array in DFS order', () => {
+    let myGraph = buildSampleNonConnectedGraph();
+    expect(graphDfs(myGraph)).toEqual([0, 1, 2, 3, 4, 6, 5])
+  })
+
+  // Funnily enough the DFS result is equal to the BFS result with this particular graph
+  it('BFS on a graph returns array in BFS order', () => {
+    let myGraph = buildSampleNonConnectedGraph();
+    expect(graphBfs(myGraph)).toEqual([0, 1, 2, 3, 4, 6, 5])
+   })
 })
