@@ -43,7 +43,7 @@ export class LinkedListAndNode {
     return this;
   }
 
-  printDummyHumanReadable(): string {
+  printHumanReadable(): string {
     let node: LinkedListAndNode = this;
     let result: string = node.payload + '->'
     while (node.next !== null) {
@@ -69,24 +69,3 @@ for (let i = 1; i < 11; i++) {
   myLinkedList.appendToEnd(i);
 }
 
-// If i want to add at the beginning(index 0) then my appendAtIndex returns
-// a new linked list with the first node being the node I wanted to insert
-// an the rest being what already was in the original myLinkedList and the function
-// doesn't modify the original linked list
-let newLL = myLinkedList.appendAtIndex(0, 100);
-console.log('myLinkedList (original not modified):', myLinkedList.printDummyHumanReadable());
-console.log('newLL(new modified):', newLL.printDummyHumanReadable());
-
-// Here is the thing when I appendAtIndex to an index different than 0 this edits 
-// my original linked list and also returns a new copy. I think that is tolerable
-// like in the Array Class some functions modify the original and some return a new 
-// modified copy
-let otherLL = myLinkedList.appendAtIndex(5, 100);
-console.log('myLinkedList:', myLinkedList.printDummyHumanReadable());
-console.log(otherLL.printDummyHumanReadable());
-
-
-//Another way will to insert at the beginning will be
-let otherOtherLL: LinkedListAndNode = new LinkedListAndNode(100);
-otherOtherLL.next = myLinkedList;
-console.log('otherOtherLL: ', otherOtherLL.printDummyHumanReadable());
