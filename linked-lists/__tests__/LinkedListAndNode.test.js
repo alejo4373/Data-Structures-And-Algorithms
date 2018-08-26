@@ -1,6 +1,6 @@
 let { LinkedListAndNode } = require('../LinkedListAndNode');
 
-test('Creates a new LinkedListAndNode and adds 10 elements', () => {
+it('Creates a new LinkedListAndNode and adds 10 elements', () => {
   let myLinkedList = new LinkedListAndNode(0);
   for (let i = 1; i < 11; i++) {
     myLinkedList.appendToEnd(i);
@@ -8,7 +8,7 @@ test('Creates a new LinkedListAndNode and adds 10 elements', () => {
   expect(myLinkedList.printDummyHumanReadable()).toBe('0->1->2->3->4->5->6->7->8->9->10->null')
 });
 
-test('Creates a new LinkedListAndNode and adds number 100 at "index" 5', () => {
+it('Creates a new LinkedListAndNode and adds number 100 at "index" 5', () => {
   let myLinkedList = new LinkedListAndNode(0);
   for (let i = 1; i < 11; i++) {
     myLinkedList.appendToEnd(i);
