@@ -1,6 +1,6 @@
 import { btsBuilder } from '../bstFromSortedArray'
 import { BinaryTreeNode } from '../BinaryTreeNode';
-import { binarySearch } from '../BinarySearchTree';
+import { binarySearch } from '../BinarySearch';
 
 describe('bstFromSortedArray', () => { 
   it('Returns a binary search tree out of an array', () => {

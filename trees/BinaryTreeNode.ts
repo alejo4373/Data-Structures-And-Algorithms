@@ -73,8 +73,8 @@ export class BinaryTreeNode {
     let queue: Queue = new Queue();
     queue.enqueue(this);
     while (!queue.isEmpty()) {
-      let currentNode = queue.dequeue() 
-      if (currentNode.left) queue.enqueue(currentNode.left);
+      let currentNode = queue.dequeue(); 
+      if (currentNode.left)  queue.enqueue(currentNode.left);
       if (currentNode.right) queue.enqueue(currentNode.right);
       traverse.push(currentNode.val);
     }

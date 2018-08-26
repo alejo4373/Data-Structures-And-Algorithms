@@ -1,6 +1,6 @@
 import { btsBuilder } from '../bstFromSortedArray';
 import { leftMostChild, findInorderSuccessor } from '../findInorderSuccessor';
-import { binarySearch } from '../BinarySearchTree';
+import { binarySearch } from '../BinarySearch';
 
 describe('findInorderSuccessor', () => { 
   it('Find left most child', () => {
