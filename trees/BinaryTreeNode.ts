@@ -44,51 +44,54 @@ export class BinaryTreeNode {
     return traverse;
   }
 
-  traverseInPreOrder(): void {
-    console.log(this.val);
+  traverseInPreOrder(): Array<any> {
+    let traverse: Array<any> = [this.val];
     if (this.left) {
-      this.left.traverseInPreOrder();
+      traverse = traverse.concat(this.left.traverseInPreOrder());
     }
     if (this.right) {
-      this.right.traverseInPreOrder();
+      traverse = traverse.concat(this.right.traverseInPreOrder());
     }
+    return traverse;
   }
 
-  traverseInPostOrder(): void {
+  traverseInPostOrder(): Array<any> {
+    let traverse: Array<any> = [];
     if (this.left) {
-      this.left.traverseInPostOrder();
+      traverse = traverse.concat(this.left.traverseInPostOrder());
     }
     if (this.right) {
-      this.right.traverseInPostOrder();
+      traverse = traverse.concat(this.right.traverseInPostOrder());
     }
-    console.log(this.val);
+    traverse.push(this.val);
+    return traverse;
   }
+
   //Breadth first traversal
-  traverseInLevelOrder(): void {
-    let queue: Queue = new Queue(this);;
+  traverseInLevelOrder(): Array<any> {
+    let traverse: Array<any> = [];
+    let queue: Queue = new Queue();
+    queue.enqueue(this);
     while (!queue.isEmpty()) {
-      let currentNode = queue.peek().data //Should fix queue implementation so that .data is not necessary
+      let currentNode = queue.dequeue() 
       if (currentNode.left) queue.enqueue(currentNode.left);
       if (currentNode.right) queue.enqueue(currentNode.right);
-      queue.dequeue();
-      console.log(currentNode.val);
+      traverse.push(currentNode.val);
     }
+    return traverse;
   }
 
   dfs_recursive(target: number | string): BinaryTreeNode {
     let node: BinaryTreeNode = this;
     if (node.val === target) {
-      console.log('found it')
       return (node)
     }
     if (node.left) {
-      console.log('left')
       // return node.left.dfs_recursive(target); //I believed this to be the sames as the two lines below but no this doesn't stop the recursive call once it found the node
       let result = node.left.dfs_recursive(target);
       if (result) return result;
     }
     if (node.right) {
-      console.log('right')
       // return node.right.dfs_recursive(target);
       let result = node.right.dfs_recursive(target);
       if (result) return result;
@@ -105,65 +108,55 @@ export class BinaryTreeNode {
       if (crrNode.right) stack.push(crrNode.right);
       if (crrNode.left) stack.push(crrNode.left);
     }
+    return null
   }
 
   bfs_iteratively(target: number | string): BinaryTreeNode {
-    let queue: Queue = new Queue(this);
-    console.log(queue)
+    let queue: Queue = new Queue();
+    queue.enqueue(this)
     while (!queue.isEmpty()) {
-      let crrNode: BinaryTreeNode = queue.peek().data;
+      let crrNode: BinaryTreeNode = queue.dequeue();
       if(crrNode.val === target) return crrNode;
       if(crrNode.left) queue.enqueue(crrNode.left);
       if(crrNode.right) queue.enqueue(crrNode.right);
-      queue.dequeue();
     }
+    return null;
   }
 }
 
+export const sampleBinaryTree = (): BinaryTreeNode => {
+  let a = new BinaryTreeNode("A");
+  let b = new BinaryTreeNode("B");
+  let c = new BinaryTreeNode("C");
+  let d = new BinaryTreeNode("D");
+  let e = new BinaryTreeNode("E");
+  let f = new BinaryTreeNode("F");
+  let g = new BinaryTreeNode("G");
+  let h = new BinaryTreeNode("H");
+  let i = new BinaryTreeNode("I");
+  let j = new BinaryTreeNode("J");
+  let k = new BinaryTreeNode("K");
 
-let a = new BinaryTreeNode("A");
-let b = new BinaryTreeNode("B");
-let c = new BinaryTreeNode("C");
-let d = new BinaryTreeNode("D");
-let e = new BinaryTreeNode("E");
-let f = new BinaryTreeNode("F");
-let g = new BinaryTreeNode("G");
-let h = new BinaryTreeNode("H");
-let i = new BinaryTreeNode("I");
-let j = new BinaryTreeNode("J");
-let k = new BinaryTreeNode("K");
+  a.left = b;
+  a.right = g;
 
-a.left = b;
-a.right = g;
+  b.left = c;
+  b.right = f;
+  b.parent = a;
 
-b.left = c;
-b.right = f;
-b.parent = a;
+  c.left = d;
+  c.right = e;
 
-c.left = d;
-c.right = e;
+  g.left = h;
+  g.right = k;
+  g.parent = a;
 
-g.left = h;
-g.right = k;
-g.parent = a;
+  h.left = i;
+  h.right = j;
 
-h.left = i;
-h.right = j;
-
-//           (A)
-//     (B)       (G)
-//   (C) (F)  (H)   (K)
-// (D)(E)   (I)(J)
-
-
-// console.log('InOrder ==>')
-// root.traverseInOrder()
-// console.log('InPreOrder ==>')
-// root.traverseInPreOrder()
-// console.log('InPostOrder ==>')
-// a.traverseInPostOrder()
-// console.log(root)
-// a.traverseInLevelOrder();
-// console.log(a.dfs_recursive('F'))
-// console.log('====')
-// console.log(a.bfs_iteratively('F'))
+  //           (A)
+  //     (B)       (G)
+  //   (C) (F)  (H)   (K)
+  // (D)(E)   (I)(J)
+  return a;
+}
