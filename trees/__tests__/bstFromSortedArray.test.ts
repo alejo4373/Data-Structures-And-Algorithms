@@ -1,8 +1,8 @@
 import { btsBuilder } from '../bstFromSortedArray'
 import { sampleBinaryTree, sampleBinarySearchTree, sampleBinaryNonSearchTree } from '../BinaryTreeNode';
-import { binarySearch, validBST, findSmallest, findLargest } from '../BinarySearch';
+import { binarySearch, validBST, findSmallest, findLargest, checkBSTInOrder } from '../BinarySearch';
 
-describe('bstFromSortedArray', () => { 
+describe('bstFromSortedArray', () => {
   it('Returns a binary search tree out of an array', () => {
     const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     let rootNode = btsBuilder(values);
@@ -21,11 +21,11 @@ describe('bstFromSortedArray', () => {
     expect(binarySearch(rootNode, 9).parent.val).toBe(8);
   })
 
-  it.only('Verifies if a given tree is a BST or not', () => {
+  it('Verifies if a given tree is a BST or not (my original approach)', () => {
     const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     let bts = btsBuilder(values);
     let charactersBts = sampleBinarySearchTree();
-    let charactersNonBts = sampleBinaryTree(); 
+    let charactersNonBts = sampleBinaryTree();
 
     expect(validBST(bts)).toBe(true);
     expect(validBST(charactersBts)).toBe(true);
@@ -39,5 +39,14 @@ describe('bstFromSortedArray', () => {
     expect(findSmallest(bts).val).toBe(1);
     expect(findLargest(bts).val).toBe(10);
   });
+
+  it('checkBST leveraging in-order traversal', () => {
+    const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    let bts = btsBuilder(values);
+    expect(checkBSTInOrder(bts)).toBe(true);
+    expect(checkBSTInOrder(sampleBinarySearchTree())).toBe(true)
+    expect(checkBSTInOrder(sampleBinaryTree())).toBe(false)
+    expect(checkBSTInOrder(sampleBinaryNonSearchTree())).toBe(false)
+  })
 })
 

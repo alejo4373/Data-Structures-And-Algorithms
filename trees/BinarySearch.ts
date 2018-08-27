@@ -22,55 +22,70 @@ export const binarySearchIteratively = (root: BinaryTreeNode, target: number | s
   stack.push(root)
   while (!stack.isEmpty()) {
     let crrNode = stack.pop();
-    if(crrNode.val === target) {
+    if (crrNode.val === target) {
       return crrNode;
-    } else if(target < crrNode.val) {
-        if(crrNode.left) {
-          stack.push(crrNode.left)
-        }
-    } else if(target > crrNode.val) {
-        if(crrNode.right) {
-          stack.push(crrNode.right);
-        }
+    } else if (target < crrNode.val) {
+      if (crrNode.left) {
+        stack.push(crrNode.left)
+      }
+    } else if (target > crrNode.val) {
+      if (crrNode.right) {
+        stack.push(crrNode.right);
+      }
     }
   }
 }
 
 export const findSmallest = (root: BinaryTreeNode): BinaryTreeNode => {
-  if(root === null) { return null };
-  if(!root.left) { return root };
+  if (root === null) { return null };
+  if (!root.left) { return root };
   let node = root.left;
-  while(node.left !== null) {
+  while (node.left !== null) {
     node = node.left;
   }
   return node;
 }
 
 export const findLargest = (root: BinaryTreeNode): BinaryTreeNode => {
-  if(root === null) { return null };
-  if(!root.right) { return root };
+  if (root === null) { return null };
+  if (!root.right) { return root };
   let node = root.right;
-  while(node.right !== null) {
+  while (node.right !== null) {
     node = node.right;
   }
   return node;
 }
 
 export const validBST = (root: BinaryTreeNode): boolean => {
-  if(root === null) { return false };
-  if(root.left) {
+  if (root === null) { return false };
+  if (root.left) {
     let leftSideLargest = findLargest(root.left).val
-    if(root.left.val > root.val || leftSideLargest > root.val) {
+    if (root.left.val > root.val || leftSideLargest > root.val) {
       return false;
-    } 
+    }
     validBST(root.left);
   }
-  if(root.right) {
+  if (root.right) {
     let rightSideSmallest = findSmallest(root.right).val
-    if(root.right.val < root.val || rightSideSmallest < root.val) {
+    if (root.right.val < root.val || rightSideSmallest < root.val) {
       return false;
     }
     validBST(root.right);
   }
+  return true;
+}
+
+// CTCI page 246
+// Leverages in order traversal keeping track of the last element viewed and
+// making sure such element is always less that the 'current' element
+let lastViewed = null;
+export const checkBSTInOrder = (n: BinaryTreeNode): boolean => {
+  if (n === null) { return true };
+  if (!checkBSTInOrder(n.left)) { return false };
+  if (lastViewed !== null && n.val <= lastViewed) {
+    return false
+  }
+  lastViewed = n.val;
+  if (!checkBSTInOrder(n.right)) { return false };
   return true;
 }
