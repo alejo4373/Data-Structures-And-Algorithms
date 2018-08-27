@@ -1,6 +1,6 @@
 import { btsBuilder } from '../bstFromSortedArray'
 import { sampleBinaryTree, sampleBinarySearchTree, sampleBinaryNonSearchTree } from '../BinaryTreeNode';
-import { binarySearch, validBST, findSmallest, findLargest, checkBSTInOrder } from '../BinarySearch';
+import { binarySearch, validBST, findSmallest, findLargest, checkBSTInOrder, checkBSTMinMax } from '../BinarySearch';
 
 describe('bstFromSortedArray', () => {
   it('Returns a binary search tree out of an array', () => {
@@ -48,5 +48,15 @@ describe('bstFromSortedArray', () => {
     expect(checkBSTInOrder(sampleBinaryTree())).toBe(false)
     expect(checkBSTInOrder(sampleBinaryNonSearchTree())).toBe(false)
   })
+
+  it('checkBST using min and max approach', () => {
+    const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    let bts = btsBuilder(values);
+    expect(checkBSTMinMax(bts)).toBe(true);
+    expect(checkBSTMinMax(sampleBinarySearchTree())).toBe(true)
+    expect(checkBSTMinMax(sampleBinaryTree())).toBe(false)
+    expect(checkBSTMinMax(sampleBinaryNonSearchTree())).toBe(false)
+  })
+
 })
 

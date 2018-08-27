@@ -89,3 +89,19 @@ export const checkBSTInOrder = (n: BinaryTreeNode): boolean => {
   if (!checkBSTInOrder(n.right)) { return false };
   return true;
 }
+
+// CTCI page 248
+// Leverages keeping track of the possible min and max value allowed 
+// for the left and right branch updating the max when we branch left and
+// updating the min when we branch right 
+export const checkBSTMinMax = (n: BinaryTreeNode, min: number | string = null, max: number | string = null): boolean => {
+  if (n === null) { return true };
+  if ((min !== null && n.val <= min) || (max !== null && n.val > max)) {
+    return false;
+  }
+  if (!checkBSTMinMax(n.left, min, n.val) || !checkBSTMinMax(n.right, n.val, max)) {
+    return false;
+  }
+  return true;
+
+}
