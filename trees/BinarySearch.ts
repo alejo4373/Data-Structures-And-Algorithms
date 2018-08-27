@@ -35,3 +35,42 @@ export const binarySearchIteratively = (root: BinaryTreeNode, target: number | s
     }
   }
 }
+
+export const findSmallest = (root: BinaryTreeNode): BinaryTreeNode => {
+  if(root === null) { return null };
+  if(!root.left) { return root };
+  let node = root.left;
+  while(node.left !== null) {
+    node = node.left;
+  }
+  return node;
+}
+
+export const findLargest = (root: BinaryTreeNode): BinaryTreeNode => {
+  if(root === null) { return null };
+  if(!root.right) { return root };
+  let node = root.right;
+  while(node.right !== null) {
+    node = node.right;
+  }
+  return node;
+}
+
+export const validBST = (root: BinaryTreeNode): boolean => {
+  if(root === null) { return false };
+  if(root.left) {
+    let leftSideLargest = findLargest(root.left).val
+    if(root.left.val > root.val || leftSideLargest > root.val) {
+      return false;
+    } 
+    validBST(root.left);
+  }
+  if(root.right) {
+    let rightSideSmallest = findSmallest(root.right).val
+    if(root.right.val < root.val || rightSideSmallest < root.val) {
+      return false;
+    }
+    validBST(root.right);
+  }
+  return true;
+}
