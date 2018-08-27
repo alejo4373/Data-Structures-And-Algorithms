@@ -12,6 +12,10 @@ describe('bstFromSortedArray', () => {
 
     let traversedInOrder = rootNode.traverseInOrder();
     expect(traversedInOrder).toEqual(values)
+
+    const valuesB = [1, 5, 8, 10, 12, 15, 20, 22, 25, 28, 30, 36, 38, 40, 45, 48, 50]
+    let bts = btsBuilder(valuesB);
+   expect(bts.traverseInOrder()).toEqual(valuesB);
   })
 
   it('Verifies nodes have parent property set properly', () => {

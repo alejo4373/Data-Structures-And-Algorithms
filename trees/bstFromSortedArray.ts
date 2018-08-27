@@ -5,11 +5,6 @@ export const btsBuilder = (arr: Array<number>, start: number = 0, end: number = 
     return null;
   }
 
-  if (end === start) {
-    let node: BinaryTreeNode =  new BinaryTreeNode(arr[start]);
-    node.parent = parent;
-  }
-
   let middle: number = Math.floor((start + end) / 2);
   let node: BinaryTreeNode = new BinaryTreeNode(arr[middle]);
   node.parent = parent;
