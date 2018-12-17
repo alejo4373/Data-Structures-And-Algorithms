@@ -8,4 +8,7 @@ it('Misses no test case', () => {
   expect(findLargestBinaryGap(32)).toBe(0);
   expect(findLargestBinaryGap(2147483647)).toBe(0);
   expect(findLargestBinaryGap(0)).toBe(0);
+  expect(findLargestBinaryGap(561892)).toBe(3);
+  expect(findLargestBinaryGap(74901729)).toBe(4);
+  expect(findLargestBinaryGap(1376796946)).toBe(5);
 })
