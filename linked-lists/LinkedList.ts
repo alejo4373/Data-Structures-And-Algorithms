@@ -132,4 +132,12 @@ export class LinkedList {
     }
     return node.payload
   }
+
+  fromArray(array: Array<number>): LinkedList {
+    let ll: LinkedList = new LinkedList();
+    for (let element of array) {
+      ll.appendToEnd(element);
+    }
+    return ll;
+  }
 }

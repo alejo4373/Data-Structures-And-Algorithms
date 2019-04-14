@@ -66,3 +66,9 @@ it('Empty list removing last element)', () => {
   expect(testLinkedList.head).toBeNull();
   expect(() => testLinkedList.printHumanReadable()).toThrowError('Error empty list. Nothing to print');
 });
+
+it('Creates a linked list out of an a array', () => {
+  let array = [1, 4, 5, 2, 1, 2, 5, 6, 7, 8, 3]
+  let ll: LinkedList = testLinkedList.fromArray(array);
+  expect(ll.printHumanReadable()).toBe('1->4->5->2->1->2->5->6->7->8->3->null')
+})
