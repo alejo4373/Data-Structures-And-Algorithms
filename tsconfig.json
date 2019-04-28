@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./build"
+    "outDir": "./build",
+    "target": "es5"
   },
   "exclude": [
     "node_modules",
