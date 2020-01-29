@@ -1,9 +1,14 @@
-# DSAStuff
-DSA related stuff for my own studying and understanding. Trying to implement Typescript features and Jest tests at the same time.
+# Data Structures and Algorithms 
 
-If you wish `git clone git@github.com:alejo4373/DSAStuff.git` then `cd DSAStuff && npm install`.
+DS&A related stuff for my own studying and understanding. Trying to use and learn Typescript and Jest tests at the same time.
 
-To compile Typescript to Javascript (optional) execute `tsc` and note that a `/build` folder will be created with the compiled code.
+If you wish `git clone git@github.com:alejo4373/Data-Structures-And-Algorithms` then `cd Data-Structures-And-Algorithms && npm install`.
 
-Lastly check if the tests pass by running `npm test`
+#### Run Tests
 
+```
+npm test
+```
+> Compilation happens automatically
+
+To run any code manually compile Typescript to Javascript executing `tsc` and note that a `/build` folder will be created with the compiled code. Then execute with `node` as usual the compiled version of the code.
